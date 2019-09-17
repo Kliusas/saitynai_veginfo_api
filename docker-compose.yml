@@ -1,0 +1,27 @@
+nginx:
+    image: nginx:1.13.3
+    volumes:
+    - ./config/nginx-docker.conf:/etc/nginx/nginx.conf
+    volumes_from:
+    - php
+    links:
+    - php
+    ports:
+    - 80:80
+php:
+    image: php:7-fpm
+    links:
+    - mysql
+    volumes:
+    - ./:/var/www/html/
+mysql:
+    image: mariadb
+    ports:
+    - "3306:3306"
+    environment:
+    - MYSQL_ROOT_PASSWORD=root
+    - MYSQL_DATABASE=saitynai
+    - MYSQL_USER=saitynai
+    - MYSQL_PASSWORD=saitynai
+    volumes:
+    - my-datavolume:/var/lib/mysql
