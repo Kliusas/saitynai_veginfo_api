@@ -14,7 +14,14 @@ class CreateRecipesTable extends Migration
     public function up()
     {
         Schema::create('recipes', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
+            $table->string('name');
+            $table->longText('description');
+            $table->integer('category_id')->unsigned();
+            $table->string('preparation_time');
+            $table->string('difficulty');
+            $table->string('products');
+            $table->foreign('category_id')->references('id')->on('dish_categories');
             $table->timestamps();
         });
     }
