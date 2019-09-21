@@ -2,29 +2,38 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 class DishCategoryController extends \App\Http\Controllers\Controller
 {
     public function index()
     {
-        return response('Hello World', 200)
-            ->header('Content-Type', 'text/plain');
+        $dishesCategories = DB::table('dish_categories')->get();
+        return response()->json($dishesCategories, 200);
     }
     
-    public function store()
+    public function show($id)
     {
-        return response('Hello World', 200)
-            ->header('Content-Type', 'text/plain');
+        $dishesCategory = DB::table('dish_categories')->get()->where('id', '=', $id);
+        return response()->json($dishesCategory, 200);
     }
     
-    public function delete()
+    public function store(Request $request)
     {
-        return response('Hello World', 200)
-            ->header('Content-Type', 'text/plain');
+        return response('Hello World', 200)->header('Content-Type', 'text/plain');
     }
     
-    public function update()
+    public function delete($id)
     {
-        return response('Hello World', 200)
-            ->header('Content-Type', 'text/plain');
+        DB::table('dish_categories')->delete($id);
+        return response()->json(true, 200);
+    }
+    
+    public function update($id)
+    {
+        $dishesCategory = DB::table('dish_categories')->get()->where('id', '=', $id);
+        $dishesCategory->update();
+        return response('Hello World', 200)->header('Content-Type', 'text/plain');
     }
 }

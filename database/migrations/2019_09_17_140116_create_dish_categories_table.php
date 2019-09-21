@@ -16,7 +16,6 @@ class CreateDishCategoriesTable extends Migration
         Schema::create('dish_categories', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->timestamps();
         });
     }
 

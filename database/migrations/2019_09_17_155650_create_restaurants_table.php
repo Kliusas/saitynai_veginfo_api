@@ -20,7 +20,6 @@ class CreateRestaurantsTable extends Migration
             $table->longText('description');
             $table->string('business_hours');
             $table->string('site_url');
-            $table->timestamps();
         });
     }
 

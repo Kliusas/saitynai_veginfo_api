@@ -18,7 +18,6 @@ class CreateShopsTable extends Migration
             $table->string('name');
             $table->longText('description');
             $table->string('site_url');
-            $table->timestamps();
         });
     }
 

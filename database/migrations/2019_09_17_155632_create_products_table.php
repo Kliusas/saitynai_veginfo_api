@@ -19,7 +19,6 @@ class CreateProductsTable extends Migration
             $table->string('ingredients');
             $table->integer('category_id')->unsigned();
             $table->foreign('category_id')->references('id')->on('product_categories');
-            $table->timestamps();
         });
     }
 

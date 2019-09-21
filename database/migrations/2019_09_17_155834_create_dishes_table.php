@@ -21,7 +21,6 @@ class CreateDishesTable extends Migration
             $table->foreign('category_id')->references('id')->on('dish_categories');
             $table->integer('restaurant_id')->unsigned();
             $table->foreign('restaurant_id')->references('id')->on('restaurants');
-            $table->timestamps();
         });
     }
 

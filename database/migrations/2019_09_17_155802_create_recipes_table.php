@@ -22,7 +22,6 @@ class CreateRecipesTable extends Migration
             $table->string('difficulty');
             $table->string('products');
             $table->foreign('category_id')->references('id')->on('dish_categories');
-            $table->timestamps();
         });
     }
 

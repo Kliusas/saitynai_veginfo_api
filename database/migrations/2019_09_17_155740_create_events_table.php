@@ -22,7 +22,6 @@ class CreateEventsTable extends Migration
             $table->longText('description');
             $table->integer('category_id')->unsigned();
             $table->foreign('category_id')->references('id')->on('event_categories');
-            $table->timestamps();
         });
     }
 

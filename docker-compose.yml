@@ -9,7 +9,7 @@ nginx:
     ports:
     - 80:80
 php:
-    image: php:7-fpm
+    build: ./config/php
     links:
     - mysql
     volumes:
