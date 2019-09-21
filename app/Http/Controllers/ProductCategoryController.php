@@ -27,9 +27,9 @@ class ProductCategoryController extends \App\Http\Controllers\Controller
     public function delete($id)
     {
         $productsCategories =DB::table('product_categories')->delete($id);
-        if($productsCategories==0)
-            return response('Tokio elemento nėra.', 410)->header('Content-Type', 'text/plain');
-        return response('Patiekalas ištrintas sėkmingai.', 410)->header('Content-Type', 'text/plain');
+        if($productsCategories)
+            return response('Patiekalas ištrintas sėkmingai.', 410)->header('Content-Type', 'text/plain');
+        return response('Tokio elemento nėra.', 410)->header('Content-Type', 'text/plain');
 
 
     }

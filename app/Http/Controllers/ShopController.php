@@ -27,9 +27,9 @@ class ShopController extends \App\Http\Controllers\Controller
     public function delete($id)
     {
         $shops =DB::table('shops')->delete($id);
-        if($shops==0)
-            return response('Tokio elemento nėra.', 410)->header('Content-Type', 'text/plain');
-        return response('Patiekalas ištrintas sėkmingai.', 410)->header('Content-Type', 'text/plain');
+        if($shops)
+            return response('Patiekalas ištrintas sėkmingai.', 410)->header('Content-Type', 'text/plain');
+        return response('Tokio elemento nėra.', 410)->header('Content-Type', 'text/plain');
 
 
     }

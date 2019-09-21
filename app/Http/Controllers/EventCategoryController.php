@@ -27,9 +27,9 @@ class EventCategoryController extends \App\Http\Controllers\Controller
     public function delete($id)
     {
         $eventsCategories =DB::table('event_categories')->delete($id);
-        if($eventsCategories==0)
-            return response('Tokio elemento nėra.', 410)->header('Content-Type', 'text/plain');
-        return response('Patiekalas ištrintas sėkmingai.', 410)->header('Content-Type', 'text/plain');
+        if($eventsCategories)
+            return response('Patiekalas ištrintas sėkmingai.', 410)->header('Content-Type', 'text/plain');
+        return response('Tokio elemento nėra.', 410)->header('Content-Type', 'text/plain');
 
 
     }

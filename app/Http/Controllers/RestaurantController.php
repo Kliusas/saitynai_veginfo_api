@@ -27,9 +27,9 @@ class RestaurantController extends \App\Http\Controllers\Controller
     public function delete($id)
     {
         $restaurants =DB::table('restaurants')->delete($id);
-        if($restaurants==0)
-            return response('Tokio elemento nėra.', 410)->header('Content-Type', 'text/plain');
-        return response('Patiekalas ištrintas sėkmingai.', 410)->header('Content-Type', 'text/plain');
+        if($restaurants)
+            return response('Patiekalas ištrintas sėkmingai.', 410)->header('Content-Type', 'text/plain');
+        return response('Tokio elemento nėra.', 410)->header('Content-Type', 'text/plain');
 
 
     }
