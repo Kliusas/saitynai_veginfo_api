@@ -1,30 +1,43 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\DB;
 
 class RecipeController extends \App\Http\Controllers\Controller
 {
     public function index()
     {
-        return response('Hello World', 200)
-            ->header('Content-Type', 'text/plain');
+        $recipes = DB::table('recipes')->get();
+        return response()->json($recipes, 200);
     }
-    
-    public function store()
+
+    public function show($id)
     {
-        return response('Hello World', 200)
-            ->header('Content-Type', 'text/plain');
+        $recipes = DB::table('recipes')->get()->where('id', '=', $id);
+        if($recipes->isEmpty())
+            return response('Tokio elemento nėra.', 409)->header('Content-Type', 'text/plain');
+        return response()->json($recipes, 200);
     }
-    
-    public function delete()
+
+    public function store(Request $request)
     {
-        return response('Hello World', 200)
-            ->header('Content-Type', 'text/plain');
+        return response('Hello World', 200)->header('Content-Type', 'text/plain');
     }
-    
-    public function update()
+
+    public function delete($id)
     {
-        return response('Hello World', 200)
-            ->header('Content-Type', 'text/plain');
+        $recipes =DB::table('recipes')->delete($id);
+        if($recipes==0)
+            return response('Tokio elemento nėra.', 410)->header('Content-Type', 'text/plain');
+        return response('Patiekalas ištrintas sėkmingai.', 410)->header('Content-Type', 'text/plain');
+
+
+    }
+
+    public function update($id)
+    {
+        $recipes = DB::table('recipes')->get()->where('id', '=', $id);
+        $recipes->update();
+        return response('Hello World', 200)->header('Content-Type', 'text/plain');
     }
 }
