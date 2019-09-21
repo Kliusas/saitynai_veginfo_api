@@ -1,30 +1,43 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\DB;
 
 class RestaurantController extends \App\Http\Controllers\Controller
 {
     public function index()
     {
-        return response('Hello World', 200)
-            ->header('Content-Type', 'text/plain');
+        $restaurants = DB::table('restaurants')->get();
+        return response()->json($restaurants, 200);
     }
-    
-    public function store()
+
+    public function show($id)
     {
-        return response('Hello World', 200)
-            ->header('Content-Type', 'text/plain');
+        $restaurants = DB::table('restaurants')->get()->where('id', '=', $id);
+        if($restaurants->isEmpty())
+            return response()->json('Tokio elemento nėra.', 409);
+        return response()->json($restaurants, 200);
     }
-    
-    public function delete()
+
+    public function store(Request $request)
     {
-        return response('Hello World', 200)
-            ->header('Content-Type', 'text/plain');
+        return response()->json(true, 200);
     }
-    
-    public function update()
+
+    public function delete($id)
     {
-        return response('Hello World', 200)
-            ->header('Content-Type', 'text/plain');
+        $restaurants =DB::table('restaurants')->delete($id);
+        if($restaurants)
+            return response()->json( $restaurants,204);
+        return response()->json('Tokio elemento nėra.', 410);
+
+
+    }
+
+    public function update($id)
+    {
+        $restaurants = DB::table('restaurants')->get()->where('id', '=', $id);
+        $restaurants->update();
+        return response()->json($restaurants, 210);
     }
 }

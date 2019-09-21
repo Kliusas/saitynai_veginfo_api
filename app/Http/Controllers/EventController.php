@@ -1,30 +1,43 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\DB;
 
 class EventController extends \App\Http\Controllers\Controller
 {
     public function index()
     {
-        return response('Hello World', 200)
-            ->header('Content-Type', 'text/plain');
+        $events = DB::table('events')->get();
+        return response()->json($events, 200);
     }
-    
-    public function store()
+
+    public function show($id)
     {
-        return response('Hello World', 200)
-            ->header('Content-Type', 'text/plain');
+        $events = DB::table('events')->get()->where('id', '=', $id);
+        if($events->isEmpty())
+                return response()->json('Tokio elemento nėra.', 409);
+        return response()->json($events, 200);
     }
-    
-    public function delete()
+
+    public function store(Request $request)
     {
-        return response('Hello World', 200)
-            ->header('Content-Type', 'text/plain');
+        return response()->json(true, 200);
     }
-    
-    public function update()
+
+    public function delete($id)
     {
-        return response('Hello World', 200)
-            ->header('Content-Type', 'text/plain');
+        $events =DB::table('events')->delete($id);
+        if($events)
+            return response()->json( $events,204);
+        return response()->json('Tokio elemento nėra.', 410);
+
+
+    }
+
+    public function update($id)
+    {
+        $events = DB::table('events')->get()->where('id', '=', $id);
+        $events->update();
+        return response()->json($events, 210);
     }
 }

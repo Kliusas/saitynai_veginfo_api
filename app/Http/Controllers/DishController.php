@@ -1,30 +1,42 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\DB;
 
 class DishController extends \App\Http\Controllers\Controller
 {
     public function index()
     {
-        return response('Hello World', 200)
-            ->header('Content-Type', 'text/plain');
+        $dishes = DB::table('dishes')->get();
+        return response()->json($dishes, 200);
     }
-    
-    public function store()
+
+    public function show($id)
     {
-        return response('Hello World', 200)
-            ->header('Content-Type', 'text/plain');
+        $dishes = DB::table('dishes')->get()->where('id', '=', $id);
+        if($dishes->isEmpty())
+            return response()->json('Tokio elemento nėra.', 409);
+        return response()->json($dishes, 200);
     }
-    
-    public function delete()
+
+    public function store(Request $request)
     {
-        return response('Hello World', 200)
-            ->header('Content-Type', 'text/plain');
+        return response()->json(true, 200);
     }
-    
-    public function update()
+
+    public function delete($id)
     {
-        return response('Hello World', 200)
-            ->header('Content-Type', 'text/plain');
+        $dishes =DB::table('dishes')->delete($id);
+        if($dishes)
+            return response()->json( $dishes,204);
+        return response()->json('Tokio elemento nėra.', 410);
+
+    }
+
+    public function update($id)
+    {
+        $dishes = DB::table('dishes')->get()->where('id', '=', $id);
+        $dishes->update();
+        return response()->json($dishes, 210);
     }
 }

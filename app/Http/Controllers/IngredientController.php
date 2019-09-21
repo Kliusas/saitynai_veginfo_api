@@ -1,30 +1,43 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\DB;
 
 class IngredientController extends \App\Http\Controllers\Controller
 {
     public function index()
     {
-        return response('Hello World', 200)
-            ->header('Content-Type', 'text/plain');
+        $ingredients = DB::table('ingredients')->get();
+        return response()->json($ingredients, 200);
     }
-    
-    public function store()
+
+    public function show($id)
     {
-        return response('Hello World', 200)
-            ->header('Content-Type', 'text/plain');
+        $ingredients = DB::table('ingredients')->get()->where('id', '=', $id);
+        if($ingredients->isEmpty())
+            return response()->json('Tokio elemento nėra.', 409);
+        return response()->json($ingredients, 200);
     }
-    
-    public function delete()
+
+    public function store(Request $request)
     {
-        return response('Hello World', 200)
-            ->header('Content-Type', 'text/plain');
+        return response()->json(true, 200);
     }
-    
-    public function update()
+
+    public function delete($id)
     {
-        return response('Hello World', 200)
-            ->header('Content-Type', 'text/plain');
+        $ingredients =DB::table('ingredients')->delete($id);
+        if($ingredients)
+            return response()->json( $ingredients,204);
+        return response()->json('Tokio elemento nėra.', 410);
+
+
+    }
+
+    public function update($id)
+    {
+        $ingredients = DB::table('ingredients')->get()->where('id', '=', $id);
+        $ingredients->update();
+        return response()->json($ingredients, 210);
     }
 }
