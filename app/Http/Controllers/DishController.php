@@ -15,22 +15,21 @@ class DishController extends \App\Http\Controllers\Controller
     {
         $dishes = DB::table('dishes')->get()->where('id', '=', $id);
         if($dishes->isEmpty())
-            return response('Tokio elemento nėra.', 409)->header('Content-Type', 'text/plain');
+            return response()->json('Tokio elemento nėra.', 409);
         return response()->json($dishes, 200);
     }
 
     public function store(Request $request)
     {
-        return response('Hello World', 200)->header('Content-Type', 'text/plain');
+        return response()->json(true, 200);
     }
 
     public function delete($id)
     {
         $dishes =DB::table('dishes')->delete($id);
         if($dishes)
-            return response('Patiekalas ištrintas sėkmingai.', 410)->header('Content-Type', 'text/plain');
-        return response('Tokio elemento nėra.', 410)->header('Content-Type', 'text/plain');
-
+            return response()->json( $dishes,204);
+        return response()->json('Tokio elemento nėra.', 410);
 
     }
 
@@ -38,6 +37,6 @@ class DishController extends \App\Http\Controllers\Controller
     {
         $dishes = DB::table('dishes')->get()->where('id', '=', $id);
         $dishes->update();
-        return response('Hello World', 200)->header('Content-Type', 'text/plain');
+        return response()->json($dishes, 210);
     }
 }

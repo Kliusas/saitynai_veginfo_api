@@ -15,21 +15,21 @@ class RecipeController extends \App\Http\Controllers\Controller
     {
         $recipes = DB::table('recipes')->get()->where('id', '=', $id);
         if($recipes->isEmpty())
-            return response('Tokio elemento nėra.', 409)->header('Content-Type', 'text/plain');
+            return response()->json('Tokio elemento nėra.', 409);
         return response()->json($recipes, 200);
     }
 
     public function store(Request $request)
     {
-        return response('Hello World', 200)->header('Content-Type', 'text/plain');
+        return response()->json(true, 200);
     }
 
     public function delete($id)
     {
         $recipes =DB::table('recipes')->delete($id);
         if($recipes)
-            return response('Patiekalas ištrintas sėkmingai.', 410)->header('Content-Type', 'text/plain');
-        return response('Tokio elemento nėra.', 410)->header('Content-Type', 'text/plain');
+            return response()->json( $recipes,204);
+        return response()->json('Tokio elemento nėra.', 410);
 
 
     }
@@ -38,6 +38,6 @@ class RecipeController extends \App\Http\Controllers\Controller
     {
         $recipes = DB::table('recipes')->get()->where('id', '=', $id);
         $recipes->update();
-        return response('Hello World', 200)->header('Content-Type', 'text/plain');
+        return response()->json($recipes, 210);
     }
 }

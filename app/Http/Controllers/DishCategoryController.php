@@ -16,24 +16,28 @@ class DishCategoryController extends \App\Http\Controllers\Controller
     public function show($id)
     {
         $dishesCategory = DB::table('dish_categories')->get()->where('id', '=', $id);
+        if($dishesCategory->isEmpty())
+            return response()->json('Tokio elemento nėra.', 409);
         return response()->json($dishesCategory, 200);
     }
     
     public function store(Request $request)
     {
-        return response('Hello World', 200)->header('Content-Type', 'text/plain');
+        return response()->json(true, 200);
     }
     
     public function delete($id)
     {
-        DB::table('dish_categories')->delete($id);
-        return response()->json(true, 200);
+        $dishesCategory = DB::table('dish_categories')->delete($id);
+        if($dishesCategory)
+            return response()->json( $dishesCategory,204);
+        return response()->json('Tokio elemento nėra.', 410);
     }
     
     public function update($id)
     {
         $dishesCategory = DB::table('dish_categories')->get()->where('id', '=', $id);
         $dishesCategory->update();
-        return response('Hello World', 200)->header('Content-Type', 'text/plain');
+        return response()->json($dishesCategory, 210);
     }
 }

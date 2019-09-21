@@ -15,21 +15,21 @@ class ProductController extends \App\Http\Controllers\Controller
     {
         $products = DB::table('products')->get()->where('id', '=', $id);
         if($products->isEmpty())
-            return response('Tokio elemento nėra.', 409)->header('Content-Type', 'text/plain');
+            return response()->json('Tokio elemento nėra.', 409);
         return response()->json($products, 200);
     }
 
     public function store(Request $request)
     {
-        return response('Hello World', 200)->header('Content-Type', 'text/plain');
+        return response()->json(true, 200);
     }
 
     public function delete($id)
     {
         $products =DB::table('products')->delete($id);
         if($products)
-            return response('Patiekalas ištrintas sėkmingai.', 410)->header('Content-Type', 'text/plain');
-        return response('Tokio elemento nėra.', 410)->header('Content-Type', 'text/plain');
+            return response()->json( $products,204);
+        return response()->json('Tokio elemento nėra.', 410);
 
 
     }
@@ -38,6 +38,6 @@ class ProductController extends \App\Http\Controllers\Controller
     {
         $products = DB::table('products')->get()->where('id', '=', $id);
         $products->update();
-        return response('Hello World', 200)->header('Content-Type', 'text/plain');
+        return response()->json($products, 210);
     }
 }
