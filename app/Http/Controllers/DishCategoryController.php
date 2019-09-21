@@ -23,6 +23,9 @@ class DishCategoryController extends \App\Http\Controllers\Controller
     
     public function store(Request $request)
     {
+        DB::table('dish_categories')->insert(
+            array('name' => $request->all()['name'])
+        );
         return response()->json(true, 200);
     }
     
@@ -34,10 +37,12 @@ class DishCategoryController extends \App\Http\Controllers\Controller
         return response()->json('Tokio elemento nėra.', 410);
     }
     
-    public function update($id)
+    public function update($id, Request $request)
     {
-        $dishesCategory = DB::table('dish_categories')->get()->where('id', '=', $id);
-        $dishesCategory->update();
-        return response()->json($dishesCategory, 210);
+        DB::table('dish_categories')
+          ->where('id', '=', $id)
+          ->update(array('name' => $request->all()['name']));
+
+        return response()->json('paupdatinau', 210);
     }
 }
