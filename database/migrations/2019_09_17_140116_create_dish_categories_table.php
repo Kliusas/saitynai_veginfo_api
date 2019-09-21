@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRhopsTable extends Migration
+class CreateDishCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class CreateRhopsTable extends Migration
      */
     public function up()
     {
-        Schema::create('rhops', function (Blueprint $table) {
-            $table->bigIncrements('id');
+        Schema::create('dish_categories', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ class CreateRhopsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rhops');
+        Schema::dropIfExists('dish_categories');
     }
 }
