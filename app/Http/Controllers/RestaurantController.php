@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class RestaurantController extends \App\Http\Controllers\Controller
@@ -15,13 +17,18 @@ class RestaurantController extends \App\Http\Controllers\Controller
     {
         $restaurants = DB::table('restaurants')->get()->where('id', '=', $id);
         if($restaurants->isEmpty())
-            return response()->json('Tokio elemento nėra.', 409);
+            return response()->json('Tokio elemento nėra.', 440);
         return response()->json($restaurants, 200);
     }
 
     public function store(Request $request)
     {
-        return response()->json(true, 200);
+        try {
+            DB::table('restaurants')->insert($request->all());
+        }catch (\Exception $exception){
+            return response()->json('Įvyko klaida kuriant naują elementą.', 441);
+        }
+        return response()->json('Elementas buvo sukurtas sėkmingai.',201);
     }
 
     public function delete($id)
@@ -29,15 +36,22 @@ class RestaurantController extends \App\Http\Controllers\Controller
         $restaurants =DB::table('restaurants')->delete($id);
         if($restaurants)
             return response()->json( $restaurants,204);
-        return response()->json('Tokio elemento nėra.', 410);
-
-
+        return response()->json('Tokio elemento nėra.', 442);
     }
 
-    public function update($id)
+    public function update($id, Request $request)
     {
-        $restaurants = DB::table('restaurants')->get()->where('id', '=', $id);
-        $restaurants->update();
-        return response()->json($restaurants, 210);
+        try {
+            $restaurants = DB::table('restaurants')->get()->where('id', '=', $id);
+            if($restaurants->isEmpty())
+                return response()->json('Tokio elemento nėra.', 440);
+            DB::table('restaurants')
+                ->where('id', '=', $id)
+                ->update($request->all());
+        } catch (\Exception $exception) {
+            return response()->json('Įvyko klaida atnaujinant duomenis.', 443);
+        }
+        return response()->json('Duomenys buvo atnaujinti sėkmingai.',209);
+
     }
 }
