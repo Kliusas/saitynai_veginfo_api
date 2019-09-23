@@ -87,3 +87,8 @@ Route::patch('shops/{id}', 'ShopController@update');
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::fallback(function(){
+    return response()->json('404. Puslapis nerastas.', 404);
+});
