@@ -21,6 +21,22 @@ class ProductCategoryController extends \App\Http\Controllers\Controller
         return response()->json($productsCategories, 200);
     }
 
+    public function showCategoryProduct($idCategory, $idProduct)
+    {
+        $categoryProduct = DB::table('products')->get()->where('id', '=', $idProduct)->where('category_id', '=', $idCategory);
+        if($categoryProduct->isEmpty())
+            return response()->json('Tokio elemento nėra.', 440);
+        return response()->json($categoryProduct, 200);
+    }
+
+    public function showAllCategoryProducts($id)
+    {
+        $categoryProducts = DB::table('products')->get()->where('category_id', '=', $id);
+        if($categoryProducts->isEmpty())
+            return response()->json('Tokio elemento nėra.', 440);
+        return response()->json($categoryProducts, 200);
+    }
+
     public function store(Request $request)
     {
         try {

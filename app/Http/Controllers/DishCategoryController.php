@@ -20,6 +20,22 @@ class DishCategoryController extends \App\Http\Controllers\Controller
             return response()->json('Tokio elemento nėra.', 440);
         return response()->json($dishesCategory, 200);
     }
+
+    public function showCategoryDish($idCategory, $idDish)
+    {
+        $categoryDish = DB::table('dishes')->get()->where('id', '=', $idDish)->where('category_id', '=', $idCategory);
+        if($categoryDish->isEmpty())
+            return response()->json('Tokio elemento nėra.', 440);
+        return response()->json($categoryDish, 200);
+    }
+
+    public function showAllCategoryDishes($id)
+    {
+        $categoryDishes = DB::table('dishes')->get()->where('category_id', '=', $id);
+        if($categoryDishes->isEmpty())
+            return response()->json('Tokio elemento nėra.', 440);
+        return response()->json($categoryDishes, 200);
+    }
     
     public function store(Request $request)
     {
