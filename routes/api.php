@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 */
 
 
-Route::get('dishes-categories', 'DishCategoryController@index');
+Route::get('dishes-categories', 'DishCategoryController@index')->middleware('auth:api');
 Route::get('dishes-categories/{id}', 'DishCategoryController@show');
 Route::post('dishes-categories', 'DishCategoryController@store');
 Route::delete('dishes-categories/{id}', 'DishCategoryController@delete');
@@ -82,6 +82,13 @@ Route::get('shops/{id}', 'ShopController@show');
 Route::post('shops', 'ShopController@store');
 Route::delete('shops/{id}', 'ShopController@delete');
 Route::patch('shops/{id}', 'ShopController@update');
+
+
+Route::get('redirect/{driver}', 'Auth\LoginController@redirectToProvider')
+    ->where('driver', implode('|', config('auth.socialite.drivers')));
+
+Route::get('{driver}/callback', 'Auth\LoginController@handleProviderCallback')
+    ->where('driver', implode('|', config('auth.socialite.drivers')));
 
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
