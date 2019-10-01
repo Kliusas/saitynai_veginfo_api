@@ -21,6 +21,28 @@ class ShopController extends \App\Http\Controllers\Controller
         return response()->json($shops, 200);
     }
 
+    public function showShopProduct($idShop, $idProduct)
+    {
+        $shopProduct = DB::table('shop_products')->get()->where('shop_id', '=', $idShop)->where('product_id', '=', $idProduct);
+        if($shopProduct->isEmpty())
+            return response()->json('Tokio elemento nėra.', 440);
+        $product=DB::table('products')->get()->where('id', '=', $idProduct );
+        return response()->json($product, 200);
+    }
+
+    public function showAllShopProducts($id)
+    {
+        $shopProductsAll = DB::table('shop_products')->get()->where('shop_id', '=', $id);
+        $array= array();
+        if($shopProductsAll->isEmpty())
+            return response()->json('Tokio elemento nėra arba parduotvė neturi pridėtų produktų.', 440);
+        foreach ($shopProductsAll as $productId){
+            $product=DB::table('products')->get()->where('id', '=', $productId->product_id);
+            $array[]=$product;
+        }
+        return response()->json($array, 200);
+    }
+
     public function store(Request $request)
     {
         try {

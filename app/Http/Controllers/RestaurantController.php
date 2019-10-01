@@ -21,6 +21,22 @@ class RestaurantController extends \App\Http\Controllers\Controller
         return response()->json($restaurants, 200);
     }
 
+    public function showRestaurantDish($idRestaurant, $idDish)
+    {
+        $restaurantDish = DB::table('dishes')->get()->where('id', '=', $idDish)->where('restaurant_id', '=', $idRestaurant);
+        if($restaurantDish->isEmpty())
+            return response()->json('Tokio elemento nėra.', 440);
+        return response()->json($restaurantDish, 200);
+    }
+
+    public function showAllRestaurantDishes($id)
+    {
+        $restaurantDishes = DB::table('dishes')->get()->where('restaurant_id', '=', $id);
+        if($restaurantDishes->isEmpty())
+            return response()->json('Tokio elemento nėra.', 440);
+        return response()->json($restaurantDishes, 200);
+    }
+
     public function store(Request $request)
     {
         try {

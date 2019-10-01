@@ -21,6 +21,26 @@ class ProductController extends \App\Http\Controllers\Controller
         return response()->json($products, 200);
     }
 
+    public function showProductIngredient($idProduct, $idIngredient)
+    {
+        $product=DB::table('products')->get()->where('id', '=', $idProduct);
+        $productsIngredients=explode(", ", $product[0]->ingredients );
+        foreach ($productsIngredients as $ingredient){
+            $ingredientDB=DB::table('ingredients')->get()->where('name', '=', $ingredient)->where('id','=',$idIngredient);
+            if(!$ingredientDB->isEmpty())
+            return response()->json($ingredientDB, 200);
+        }
+        return response()->json('Tokio elemento nėra.', 440);
+    }
+
+    public function showAllProductIngredient($id)
+    {
+        $categoryDishes = DB::table('dishes')->get()->where('category_id', '=', $id);
+        if($categoryDishes->isEmpty())
+            return response()->json('Tokio elemento nėra.', 440);
+        return response()->json($categoryDishes, 200);
+    }
+
     public function store(Request $request)
     {
         try {
