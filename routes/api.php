@@ -51,22 +51,22 @@ Route::delete('ingredients/{id}', 'IngredientController@delete');
 Route::patch('ingredients/{id}', 'IngredientController@update');
 
 
-Route::get('product-categories', 'ProductCategoryController@index');
-Route::get('product-categories/{id}', 'ProductCategoryController@show');
-Route::get('product-categories/{id}/products/{idProduct}', 'ProductCategoryController@showCategoryProduct');
-Route::get('product-categories/{id}/products', 'ProductCategoryController@showAllCategoryProducts');
-Route::post('product-categories', 'ProductCategoryController@store');
-Route::delete('product-categories/{id}', 'ProductCategoryController@delete');
-Route::patch('product-categories/{id}', 'ProductCategoryController@update');
+Route::get('product-categories', 'ProductCategoryController@index')->middleware('auth:api');
+Route::get('product-categories/{id}', 'ProductCategoryController@show')->middleware('auth:api');
+Route::get('product-categories/{id}/products/{idProduct}', 'ProductCategoryController@showCategoryProduct')->middleware('auth:api');
+Route::get('product-categories/{id}/products', 'ProductCategoryController@showAllCategoryProducts')->middleware('auth:api');
+Route::post('product-categories', 'ProductCategoryController@store')->middleware('auth:api');
+Route::delete('product-categories/{id}', 'ProductCategoryController@delete')->middleware('auth:api');
+Route::patch('product-categories/{id}', 'ProductCategoryController@update')->middleware('auth:api');
 
 
-Route::get('products', 'ProductController@index');
-Route::get('products/{id}', 'ProductController@show');
-Route::get('products/{id}/ingredients/{idIngredient}', 'ProductController@showProductIngredient');
-Route::get('products/{id}/ingredients', 'ProductController@showAllProductIngredient');
-Route::post('products', 'ProductController@store');
-Route::delete('products/{id}', 'ProductController@delete');
-Route::patch('products/{id}', 'ProductController@update');
+Route::get('products', 'ProductController@index')->middleware('auth:api');
+Route::get('products/{id}', 'ProductController@show')->middleware('auth:api');
+Route::get('products/{id}/ingredients/{idIngredient}', 'ProductController@showProductIngredient')->middleware('auth:api');
+Route::get('products/{id}/ingredients', 'ProductController@showAllProductIngredient')->middleware('auth:api');
+Route::post('products', 'ProductController@store')->middleware('auth:api');
+Route::delete('products/{id}', 'ProductController@delete')->middleware('auth:api');
+Route::patch('products/{id}', 'ProductController@update')->middleware('auth:api');
 
 
 Route::get('recipes', 'RecipeController@index');
@@ -85,13 +85,13 @@ Route::delete('restaurants/{id}', 'RestaurantController@delete');
 Route::patch('restaurants/{id}', 'RestaurantController@update');
 
 
-Route::get('shops', 'ShopController@index');
-Route::get('shops/{id}', 'ShopController@show');
-Route::get('shops/{id}/products/{idProduct}', 'ShopController@showShopProduct');
-Route::get('shops/{id}/products', 'ShopController@showAllShopProducts');
-Route::post('shops', 'ShopController@store');
-Route::delete('shops/{id}', 'ShopController@delete');
-Route::patch('shops/{id}', 'ShopController@update');
+Route::get('shops', 'ShopController@index')->middleware('auth:api');
+Route::get('shops/{id}', 'ShopController@show')->middleware('auth:api');
+Route::get('shops/{id}/products/{idProduct}', 'ShopController@showShopProduct')->middleware('auth:api');
+Route::get('shops/{id}/products', 'ShopController@showAllShopProducts')->middleware('auth:api');
+Route::post('shops', 'ShopController@store')->middleware('auth:api');
+Route::delete('shops/{id}', 'ShopController@delete')->middleware('auth:api');
+Route::patch('shops/{id}', 'ShopController@update')->middleware('auth:api');
 
 
 Route::get('redirect/{driver}', 'Auth\LoginController@redirectToProvider')
