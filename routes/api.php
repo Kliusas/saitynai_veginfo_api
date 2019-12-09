@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 */
 
 
-Route::get('dishes-categories', 'DishCategoryController@index')->middleware('auth:api');
+Route::get('dishes-categories', 'DishCategoryController@index')->middleware('customauth');
 Route::get('dishes-categories/{id}', 'DishCategoryController@show');
 Route::get('dishes-categories/{id}/dishes/{idDish}', 'DishCategoryController@showCategoryDish');
 Route::get('dishes-categories/{id}/dishes', 'DishCategoryController@showAllCategoryDishes');
@@ -51,22 +51,22 @@ Route::delete('ingredients/{id}', 'IngredientController@delete');
 Route::patch('ingredients/{id}', 'IngredientController@update');
 
 
-Route::get('product-categories', 'ProductCategoryController@index')->middleware('auth:api');
-Route::get('product-categories/{id}', 'ProductCategoryController@show')->middleware('auth:api');
-Route::get('product-categories/{id}/products/{idProduct}', 'ProductCategoryController@showCategoryProduct')->middleware('auth:api');
-Route::get('product-categories/{id}/products', 'ProductCategoryController@showAllCategoryProducts')->middleware('auth:api');
-Route::post('product-categories', 'ProductCategoryController@store')->middleware('auth:api');
-Route::delete('product-categories/{id}', 'ProductCategoryController@delete')->middleware('auth:api');
-Route::patch('product-categories/{id}', 'ProductCategoryController@update')->middleware('auth:api');
+Route::get('product-categories', 'ProductCategoryController@index')->middleware('customauth');
+Route::get('product-categories/{id}', 'ProductCategoryController@show')->middleware('customauth');
+Route::get('product-categories/{id}/products/{idProduct}', 'ProductCategoryController@showCategoryProduct')->middleware('customauth');
+Route::get('product-categories/{id}/products', 'ProductCategoryController@showAllCategoryProducts')->middleware('customauth');
+Route::post('product-categories', 'ProductCategoryController@store')->middleware('customauth');
+Route::delete('product-categories/{id}', 'ProductCategoryController@delete')->middleware('customauth');
+Route::patch('product-categories/{id}', 'ProductCategoryController@update')->middleware('customauth');
 
 
-Route::get('products', 'ProductController@index')->middleware('auth:api');
-Route::get('products/{id}', 'ProductController@show')->middleware('auth:api');
-Route::get('products/{id}/ingredients/{idIngredient}', 'ProductController@showProductIngredient')->middleware('auth:api');
-Route::get('products/{id}/ingredients', 'ProductController@showAllProductIngredient')->middleware('auth:api');
-Route::post('products', 'ProductController@store')->middleware('auth:api');
-Route::delete('products/{id}', 'ProductController@delete')->middleware('auth:api');
-Route::patch('products/{id}', 'ProductController@update')->middleware('auth:api');
+Route::get('products', 'ProductController@index')->middleware('customauth');
+Route::get('products/{id}', 'ProductController@show')->middleware('customauth');
+Route::get('products/{id}/ingredients/{idIngredient}', 'ProductController@showProductIngredient')->middleware('customauth');
+Route::get('products/{id}/ingredients', 'ProductController@showAllProductIngredient')->middleware('customauth');
+Route::post('products', 'ProductController@store')->middleware('customauth');
+Route::delete('products/{id}', 'ProductController@delete')->middleware('customauth');
+Route::patch('products/{id}', 'ProductController@update')->middleware('customauth');
 
 
 Route::get('recipes', 'RecipeController@index');
@@ -85,13 +85,13 @@ Route::delete('restaurants/{id}', 'RestaurantController@delete');
 Route::patch('restaurants/{id}', 'RestaurantController@update');
 
 
-Route::get('shops', 'ShopController@index')->middleware('auth:api');
-Route::get('shops/{id}', 'ShopController@show')->middleware('auth:api');
-Route::get('shops/{id}/products/{idProduct}', 'ShopController@showShopProduct')->middleware('auth:api');
-Route::get('shops/{id}/products', 'ShopController@showAllShopProducts')->middleware('auth:api');
-Route::post('shops', 'ShopController@store')->middleware('auth:api');
-Route::delete('shops/{id}', 'ShopController@delete')->middleware('auth:api');
-Route::patch('shops/{id}', 'ShopController@update')->middleware('auth:api');
+Route::get('shops', 'ShopController@index')->middleware('customauth');
+Route::get('shops/{id}', 'ShopController@show')->middleware('customauth');
+Route::get('shops/{id}/products/{idProduct}', 'ShopController@showShopProduct')->middleware('customauth');
+Route::get('shops/{id}/products', 'ShopController@showAllShopProducts')->middleware('customauth');
+Route::post('shops', 'ShopController@store')->middleware('customauth');
+Route::delete('shops/{id}', 'ShopController@delete')->middleware('customauth');
+Route::patch('shops/{id}', 'ShopController@update')->middleware('customauth');
 
 
 Route::get('redirect/{driver}', 'Auth\LoginController@redirectToProvider')
@@ -101,7 +101,7 @@ Route::get('{driver}/callback', 'Auth\LoginController@handleProviderCallback')
     ->where('driver', implode('|', config('auth.socialite.drivers')));
 
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+Route::middleware('customauth')->get('/user', function (Request $request) {
     return $request->user();
 });
 

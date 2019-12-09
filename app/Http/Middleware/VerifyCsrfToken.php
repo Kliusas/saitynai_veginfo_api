@@ -19,6 +19,7 @@ class VerifyCsrfToken extends Middleware
     protected $except
         = [
             "localhost/*",
+            "localhost:8081/*",
             "127.0.0.1/*",
         ];
 }
