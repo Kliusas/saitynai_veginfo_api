@@ -24,7 +24,7 @@ class DishController extends \App\Http\Controllers\Controller
     public function store(Request $request)
     {
         try {
-            DB::table('dishes')->insert(array($request->all()));
+            DB::table('dishes')->insert($request->all());
         }catch (\Exception $exception){
             return response()->json('Įvyko klaida kuriant naują elementą.', 441);
         }

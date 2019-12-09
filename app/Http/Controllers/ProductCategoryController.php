@@ -41,7 +41,7 @@ class ProductCategoryController extends \App\Http\Controllers\Controller
     public function store(Request $request)
     {
         try {
-            DB::table('product_categories')->insert(array('name' => $request->all()['name']));
+            DB::table('product_categories')->insert($request->all());
         }catch (\Exception $exception){
             return response()->json('Įvyko klaida kuriant naują elementą.', 404)->header('Content-Type', 'application/json');
         }

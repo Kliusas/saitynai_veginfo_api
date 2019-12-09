@@ -25,7 +25,7 @@ class IngredientController extends \App\Http\Controllers\Controller
     public function store(Request $request)
     {
         try {
-            DB::table('ingredients')->insert(array('name' => $request->all()['name']));
+            DB::table('ingredients')->insert($request->all());
         }catch (\Exception $exception){
             return response()->json('Įvyko klaida kuriant naują elementą.', 404)->header('Content-Type', 'application/json');
         }
