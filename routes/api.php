@@ -15,40 +15,40 @@ use Illuminate\Http\Request;
 
 
 Route::get('dishes-categories', 'DishCategoryController@index')->middleware('customauth');
-Route::get('dishes-categories/{id}', 'DishCategoryController@show');
-Route::get('dishes-categories/{id}/dishes/{idDish}', 'DishCategoryController@showCategoryDish');
-Route::get('dishes-categories/{id}/dishes', 'DishCategoryController@showAllCategoryDishes');
-Route::post('dishes-categories', 'DishCategoryController@store');
-Route::delete('dishes-categories/{id}', 'DishCategoryController@delete');
-Route::patch('dishes-categories/{id}', 'DishCategoryController@update');
+Route::get('dishes-categories/{id}', 'DishCategoryController@show')->middleware('customauth');
+Route::get('dishes-categories/{id}/dishes/{idDish}', 'DishCategoryController@showCategoryDish')->middleware('customauth');
+Route::get('dishes-categories/{id}/dishes', 'DishCategoryController@showAllCategoryDishes')->middleware('customauth');
+Route::post('dishes-categories', 'DishCategoryController@store')->middleware('customauth');
+Route::delete('dishes-categories/{id}', 'DishCategoryController@delete')->middleware('customauth');
+Route::patch('dishes-categories/{id}', 'DishCategoryController@update')->middleware('customauth');
 
 
-Route::get('dishes', 'DishController@index');
-Route::get('dishes/{id}', 'DishController@show');
-Route::post('dishes', 'DishController@store');
-Route::delete('dishes/{id}', 'DishController@delete');
-Route::patch('dishes/{id}', 'DishController@update');
+Route::get('dishes', 'DishController@index')->middleware('customauth');
+Route::get('dishes/{id}', 'DishController@show')->middleware('customauth');
+Route::post('dishes', 'DishController@store')->middleware('customauth');
+Route::delete('dishes/{id}', 'DishController@delete')->middleware('customauth');
+Route::patch('dishes/{id}', 'DishController@update')->middleware('customauth');
 
 
-Route::get('event-categories', 'EventCategoryController@index');
-Route::get('event-categories/{id}', 'EventCategoryController@show');
-Route::post('event-categories', 'EventCategoryController@store');
-Route::delete('event-categories/{id}', 'EventCategoryController@delete');
-Route::patch('event-categories/{id}', 'EventCategoryController@update');
+Route::get('event-categories', 'EventCategoryController@index')->middleware('customauth');
+Route::get('event-categories/{id}', 'EventCategoryController@show')->middleware('customauth');
+Route::post('event-categories', 'EventCategoryController@store')->middleware('customauth');
+Route::delete('event-categories/{id}', 'EventCategoryController@delete')->middleware('customauth');
+Route::patch('event-categories/{id}', 'EventCategoryController@update')->middleware('customauth');
 
 
-Route::get('events', 'EventController@index');
-Route::get('events/{id}', 'EventController@show');
-Route::post('events', 'EventController@store');
-Route::delete('events/{id}', 'EventController@delete');
-Route::patch('events/{id}', 'EventController@update');
+Route::get('events', 'EventController@index')->middleware('customauth');
+Route::get('events/{id}', 'EventController@show')->middleware('customauth');
+Route::post('events', 'EventController@store')->middleware('customauth');
+Route::delete('events/{id}', 'EventController@delete')->middleware('customauth');
+Route::patch('events/{id}', 'EventController@update')->middleware('customauth');
 
 
-Route::get('ingredients', 'IngredientController@index');
-Route::get('ingredients/{id}', 'IngredientController@show');
-Route::post('ingredients', 'IngredientController@store');
-Route::delete('ingredients/{id}', 'IngredientController@delete');
-Route::patch('ingredients/{id}', 'IngredientController@update');
+Route::get('ingredients', 'IngredientController@index')->middleware('customauth');
+Route::get('ingredients/{id}', 'IngredientController@show')->middleware('customauth');
+Route::post('ingredients', 'IngredientController@store')->middleware('customauth');
+Route::delete('ingredients/{id}', 'IngredientController@delete')->middleware('customauth');
+Route::patch('ingredients/{id}', 'IngredientController@update')->middleware('customauth');
 
 
 Route::get('product-categories', 'ProductCategoryController@index')->middleware('customauth');
@@ -69,20 +69,20 @@ Route::delete('products/{id}', 'ProductController@delete')->middleware('customau
 Route::patch('products/{id}', 'ProductController@update')->middleware('customauth');
 
 
-Route::get('recipes', 'RecipeController@index');
-Route::get('recipes/{id}', 'RecipeController@show');
-Route::post('recipes', 'RecipeController@store');
-Route::delete('recipes/{id}', 'RecipeController@delete');
-Route::patch('recipes/{id}', 'RecipeController@update');
+Route::get('recipes', 'RecipeController@index')->middleware('customauth');
+Route::get('recipes/{id}', 'RecipeController@show')->middleware('customauth');
+Route::post('recipes', 'RecipeController@store')->middleware('customauth');
+Route::delete('recipes/{id}', 'RecipeController@delete')->middleware('customauth');
+Route::patch('recipes/{id}', 'RecipeController@update')->middleware('customauth');
 
 
-Route::get('restaurants', 'RestaurantController@index');
-Route::get('restaurants/{id}', 'RestaurantController@show');
-Route::get('restaurants/{id}/dishes/{idDish}', 'RestaurantController@showRestaurantDish');
-Route::get('restaurants/{id}/dishes', 'RestaurantController@showAllRestaurantDishes');
-Route::post('restaurants', 'RestaurantController@store');
-Route::delete('restaurants/{id}', 'RestaurantController@delete');
-Route::patch('restaurants/{id}', 'RestaurantController@update');
+Route::get('restaurants', 'RestaurantController@index')->middleware('customauth');
+Route::get('restaurants/{id}', 'RestaurantController@show')->middleware('customauth');
+Route::get('restaurants/{id}/dishes/{idDish}', 'RestaurantController@showRestaurantDish')->middleware('customauth');
+Route::get('restaurants/{id}/dishes', 'RestaurantController@showAllRestaurantDishes')->middleware('customauth');
+Route::post('restaurants', 'RestaurantController@store')->middleware('customauth');
+Route::delete('restaurants/{id}', 'RestaurantController@delete')->middleware('customauth');
+Route::patch('restaurants/{id}', 'RestaurantController@update')->middleware('customauth');
 
 
 Route::get('shops', 'ShopController@index')->middleware('customauth');
