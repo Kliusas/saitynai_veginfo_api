@@ -6,17 +6,17 @@ class CustomAuthentication
 {
     /**
      * Handle an incoming request.
-     *
      * @param  \Illuminate\Http\Request $request
-     * @param  \Closure $next
+     * @param  \Closure                 $next
      * @return mixed
      */
     public function handle($request, \Closure $next)
     {
-        if (!$request->ajax()) {
-            return \Illuminate\Support\Facades\Redirect::to("http://localhost:8081/login");
+        if ($request->ajax() || strlen($request->cookie('auth')) > 15) {
+            return $next($request);
+            
         }
+        return \Illuminate\Support\Facades\Redirect::to("http://localhost:8081/login");
         
-        return $next($request);
     }
 }
